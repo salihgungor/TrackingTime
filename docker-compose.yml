@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # Our NestJS Api
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+      target: development
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules/
+    command: npm run start:dev
+    depends_on: 
+      - postgres
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/db
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - 3000:3000
+      - 9229:9229
+  
+  # Our Angular Frontend
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+      target: development
+    command: npm run start
+    volumes:
+      - ./client:/usr/client/src/app
+      - /usr/client/src/app/node_modules
+    ports:
+      - 4200:4200
+    links:
+      - api
+
+  # Our Postgres Database for NestJS to connect to
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    ports:
+      - 35000:5432
+
+  # The Postgres Admin tool if we want to run some custom queries and so on against our Database
+  pg_admin:
+    image: dpage/pgadmin4
+    depends_on: 
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5050:80
