@@ -38,7 +38,7 @@ services:
 
   # Our Postgres Database for NestJS to connect to
   postgres:
-    image: postgres:14
+    image: postgres
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
