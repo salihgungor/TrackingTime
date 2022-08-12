@@ -95,10 +95,12 @@ export class TrackingtimeService {
     return this.trackingtimeRepository.update({ id }, updateState)
   }
 
+  //get the total number of date between two date (including start_date)
   getPeriodDays(start_date: Date, end_date: Date): Number {
     return moment(end_date).diff(moment(start_date), 'days') + 1;
   }
 
+  //get the total days by giving days and hours
   getTotalInDays(days: string, halfDays: string, hours: string): Number {
     return parseInt(days) + (parseInt(halfDays) * 0.5) + (parseInt(hours) / 24)
   }
