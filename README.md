@@ -37,11 +37,15 @@ Pour la partie NESTJS :
 
 Rendez-vous sur ``localhost:3000`` pour visualiser l'api.
 
-Pour la partie Angular : 
+Pour la partie Angular : WIP
+
+# CRON
 
 ## WIP
 
+# Tests unitaires et d'intégrations
 
+## WIP
 
 # Documentation
 
