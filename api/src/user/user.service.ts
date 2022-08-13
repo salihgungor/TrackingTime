@@ -71,7 +71,7 @@ export class UserService {
     if(updatePasswordDTO.password !== updatePasswordDTO.passwordConfirm){
       throw new UnauthorizedException("The new password and the confirm password are different.")
     }
-    if(user.validatePassword(updatePasswordDTO.password)){
+    if(await user.validatePassword(updatePasswordDTO.password)){
       throw new UnauthorizedException("The current and the new password is the same.")
     }
     const newPasswordHashed = await this.hashPassword(updatePasswordDTO.password);

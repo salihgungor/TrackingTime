@@ -1,8 +1,8 @@
 #Get the node image for NestJS with specifying environnement
-FROM node:16.16.0-alpine AS development
+FROM node:16.16.0-alpine
 
 #Specify the directory 
-WORKDIR /usr/client/src/app
+WORKDIR /teampify/client/src/app
 
 #Copy the packages file from project in order to install dependencies
 COPY package*.json ./

@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed": "ts-node -r tsconfig-paths/register src/seed.ts"
+    "seed": "ts-node -r tsconfig-paths/register src/seed.ts",
+    "doc":"npx compodoc -p tsconfig.json -n \"CRA Documentation\" -s"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -31,7 +32,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.0.5",
     "@nestjs/typeorm": "^9.0.0",
-    "bcrypt": "^5.0.1",
+    "bcrypt": "5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "moment": "^2.29.4",
@@ -45,6 +46,7 @@
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.19",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",

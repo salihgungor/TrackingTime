@@ -15,6 +15,7 @@ Voici quelques pré-requis avant de commencer l'utilisation du projet.
 - NPM
 - Angular et Nest CLI
 - Docker
+- Node JS et Nest JS
 - PostgreSQL & PgAdmin
 
 ### Installation
@@ -24,8 +25,9 @@ Voici les étapes pour installer et lancer le projet :
 #### __Avec DOCKER__
 
 - Placer vous à la racine du projet ou le docker-compose.yml se trouve.
-- Executer la commmande suivante : ``docker compose up``
-
+- Executer la commmande suivante : ``docker compose --env-file ./api/.env up``
+- En cas de probleme avec la lib Bcrypt veuillez executer ces deux commandes : ``npm uninstall bcrypt && npm i bcrypt`` via `docker exec -it <container-name> /bin/bash`
+- Pour creer des utilisateurs en base de données : ``npm run seed`` en ssh.
 #### __Sans DOCKER__
 
 Pour la partie NESTJS :
@@ -49,4 +51,4 @@ Pour la partie Angular : WIP
 
 # Documentation
 
-Pour NESTJS : la documentation est genérée avec Compodoc qui est sous la racine du projet.
+Pour NESTJS : veuillez vous rendre sur le dossier /api puis lancer la commande : ``npm run doc``

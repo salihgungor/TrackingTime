@@ -76,7 +76,7 @@ export class UserController {
 
     @Get(':id/trackingtimes/:id_tt')
     @Roles('admin','user')
-    async getOneTrackingtime(@Param() params: any, @Body() updateTrackingtimeDto: UpdateTrackingtimeDto) {
+    async getOneTrackingtime(@Param() params: any) {
         let trackingtime;
         try {
             await this.userService.findOne(params.id).then((user) => {
