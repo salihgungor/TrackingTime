@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private reflector: Reflector){}
+  constructor(private reflector: Reflector) {}
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
@@ -15,7 +15,7 @@ export class RolesGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const user = req.user;
     const hasRole = () =>
-        user.roles.some(role => !!roles.find(item => item === role));
+      user.roles.some((role) => !!roles.find((item) => item === role));
     return user && user.roles && hasRole();
   }
 }

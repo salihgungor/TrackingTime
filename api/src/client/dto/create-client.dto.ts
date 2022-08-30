@@ -1,9 +1,8 @@
-import { IsNotEmpty } from "class-validator";
-import {ApiProperty} from "@nestjs/swagger";
-
+import { IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateClientDto {
-    @ApiProperty()
-    @IsNotEmpty()
-    readonly name: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  readonly name: string;
 }

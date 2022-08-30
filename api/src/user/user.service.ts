@@ -1,4 +1,9 @@
-import { Inject, Injectable, forwardRef, UnauthorizedException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  forwardRef,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UpdatePasswordDTO } from 'src/user/dto/update-password.dto';
@@ -8,7 +13,7 @@ import { CreateTrackingtimeDto } from 'src/trackingtime/dto/create-trackingtime.
 import { UpdateTrackingtimeDto } from 'src/trackingtime/dto/update-trackingtime.dto';
 import { TrackingtimeService } from 'src/trackingtime/trackingtime.service';
 import { Repository } from 'typeorm';
-import * as bcrypt from "bcrypt";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -17,19 +22,19 @@ export class UserService {
     @Inject(forwardRef(() => TrackingtimeService))
     private readonly trackingtimeService: TrackingtimeService,
   ) {}
-      
+
   create(createUserDto: CreateUserDto): Promise<User> {
     const newUser = this.userRepository.create(createUserDto);
     return this.userRepository.save(newUser).catch((e) => {
       if (e.code === '23505') {
         throw new UnauthorizedException(
           'Account with this email already exist.',
-        ); 
+        );
       }
       return e;
     });
   }
-      
+
   findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
@@ -39,46 +44,62 @@ export class UserService {
   }
 
   findOneByEmail(email: string): Promise<User> {
-    return this.userRepository.findOneBy({email});
+    return this.userRepository.findOneBy({ email });
   }
 
-  remove(id:number){
-    return this.userRepository.delete({id});
+  remove(id: number) {
+    return this.userRepository.delete({ id });
   }
 
-  async removeOneTrackingtime(id_tt:number){
+  async removeOneTrackingtime(id_tt: number) {
     return await this.trackingtimeService.remove(id_tt);
   }
 
-  async updateUser(user:User,updateUserDTO:UpdateUserDTO){
-    if(updateUserDTO.password) {updateUserDTO.password = await this.hashPassword(updateUserDTO.password)};
-    return await this.userRepository.update({"id":user.id},updateUserDTO).catch((e) => {
+  async updateUser(user: User, updateUserDTO: UpdateUserDTO) {
+    if (updateUserDTO.password) {
+      updateUserDTO.password = await this.hashPassword(updateUserDTO.password);
+    }
+    return await this.userRepository
+      .update({ id: user.id }, updateUserDTO)
+      .catch((e) => {
         if (e.code === '23505') {
           throw new UnauthorizedException(
             'Account with this email already exist.',
-          ); 
+          );
         }
         return e;
       });
   }
 
-  //update user's trackingtime by id 
-  async updateTrackingtimeById(id:number, updateTrackingtimeDto: UpdateTrackingtimeDto): Promise<CreateTrackingtimeDto|UnauthorizedException> {
-    return await this.trackingtimeService.update(id,updateTrackingtimeDto);
+  //update user's trackingtime by id
+  async updateTrackingtimeById(
+    id: number,
+    updateTrackingtimeDto: UpdateTrackingtimeDto,
+  ): Promise<CreateTrackingtimeDto | UnauthorizedException> {
+    return await this.trackingtimeService.update(id, updateTrackingtimeDto);
   }
 
-  async setPassword(user:User,updatePasswordDTO:UpdatePasswordDTO){
-    if(updatePasswordDTO.password !== updatePasswordDTO.passwordConfirm){
-      throw new UnauthorizedException("The new password and the confirm password are different.")
+  async setPassword(user: User, updatePasswordDTO: UpdatePasswordDTO) {
+    if (updatePasswordDTO.password !== updatePasswordDTO.passwordConfirm) {
+      throw new UnauthorizedException(
+        'The new password and the confirm password are different.',
+      );
     }
-    if(await user.validatePassword(updatePasswordDTO.password)){
-      throw new UnauthorizedException("The current and the new password is the same.")
+    if (await user.validatePassword(updatePasswordDTO.password)) {
+      throw new UnauthorizedException(
+        'The current and the new password is the same.',
+      );
     }
-    const newPasswordHashed = await this.hashPassword(updatePasswordDTO.password);
-    return await this.userRepository.update({"id":user.id},{"password":newPasswordHashed});
+    const newPasswordHashed = await this.hashPassword(
+      updatePasswordDTO.password,
+    );
+    return await this.userRepository.update(
+      { id: user.id },
+      { password: newPasswordHashed },
+    );
   }
 
-  async hashPassword(password:string){
-      return await bcrypt.hash(password,8);
+  async hashPassword(password: string) {
+    return await bcrypt.hash(password, 8);
   }
 }

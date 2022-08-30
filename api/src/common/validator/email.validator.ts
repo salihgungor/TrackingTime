@@ -9,17 +9,18 @@ export function IsCompanyEmail(validationOptions?: ValidationOptions) {
       options: validationOptions,
       validator: {
         validate(value: any) {
-            var regexp = new RegExp(/^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(teampify)\.com$/);
-            if(!regexp.test(value)){
-                this.error = 
-                "Email should be a teampify domain";
-                return false;
-            }
-            return true;
+          const regexp = new RegExp(
+            /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(teampify)\.com$/,
+          );
+          if (!regexp.test(value)) {
+            this.error = 'Email should be a teampify domain';
+            return false;
+          }
+          return true;
         },
         defaultMessage(): string {
           return this.error || 'Something went wrong';
-        }
+        },
       },
     });
   };

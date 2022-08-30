@@ -1,4 +1,4 @@
-import { Module,forwardRef } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TrackingtimeService } from './trackingtime.service';
 import { TrackingtimeController } from './trackingtime.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,10 +10,10 @@ import { UserModule } from 'src/user/user.module';
   imports: [
     forwardRef(() => UserModule),
     TypeOrmModule.forFeature([Trackingtime]),
-    ClientModule
+    ClientModule,
   ],
   controllers: [TrackingtimeController],
   providers: [TrackingtimeService],
-  exports: [TrackingtimeService]
+  exports: [TrackingtimeService],
 })
 export class TrackingtimeModule {}

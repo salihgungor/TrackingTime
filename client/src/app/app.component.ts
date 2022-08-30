@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import {Test,TestService } from './core/services/test.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,7 @@ import {Test,TestService } from './core/services/test.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'client';
-
-  testValue: Observable<Test> = this.service.getTest();
-  constructor(private service: TestService){
+  constructor(){
 
   }
 }

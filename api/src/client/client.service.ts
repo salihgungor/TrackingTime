@@ -8,26 +8,27 @@ import { Client } from './entities/client.entity';
 @Injectable()
 export class ClientService {
   constructor(
-    @InjectRepository(Client) private readonly clientRepository: Repository<Client>,
+    @InjectRepository(Client)
+    private readonly clientRepository: Repository<Client>,
   ) {}
-  create(createClientDto: CreateClientDto):Promise<Client> {
+  create(createClientDto: CreateClientDto): Promise<Client> {
     const newClient = this.clientRepository.create(createClientDto);
     return this.clientRepository.save(newClient);
   }
 
-  findAll():Promise<Client[]> {
+  findAll(): Promise<Client[]> {
     return this.clientRepository.find();
   }
 
-  findOne(id: number):Promise<Client> {
-    return this.clientRepository.findOneBy({id});
+  findOne(id: number): Promise<Client> {
+    return this.clientRepository.findOneBy({ id });
   }
 
   update(id: number, updateClientDto: UpdateClientDto) {
-    return this.clientRepository.update({id},updateClientDto);
+    return this.clientRepository.update({ id }, updateClientDto);
   }
 
   remove(id: number) {
-    return this.clientRepository.delete({id});
+    return this.clientRepository.delete({ id });
   }
 }

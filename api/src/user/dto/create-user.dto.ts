@@ -1,8 +1,15 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
-import { IsCompanyEmail } from "src/common/validator/email.validator";
-import { IsPasswordValid } from "src/common/validator/password.validator";
-import { UserRole } from "../entities/user.entity";
-import {ApiProperty} from "@nestjs/swagger";
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
+import { IsCompanyEmail } from 'src/common/validator/email.validator';
+import { IsPasswordValid } from 'src/common/validator/password.validator';
+import { UserRole } from '../entities/user.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -30,7 +37,7 @@ export class CreateUserDto {
   password: string;
 
   @ApiProperty()
-  @IsEnum(UserRole,{each:true})
+  @IsEnum(UserRole, { each: true })
   @IsOptional()
   roles: UserRole[];
 }

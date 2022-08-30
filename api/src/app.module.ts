@@ -13,23 +13,23 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal: true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useClass:TypeOrmConfigService
+      useClass: TypeOrmConfigService,
     }),
     AuthModule,
     ClientModule,
     TrackingtimeModule,
-    UserModule
+    UserModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: APP_FILTER,
-      useClass: HttpExceptionFilter
-    }
+      useClass: HttpExceptionFilter,
+    },
   ],
 })
 export class AppModule {}

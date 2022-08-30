@@ -9,17 +9,19 @@ export function IsPasswordValid(validationOptions?: ValidationOptions) {
       options: validationOptions,
       validator: {
         validate(value: any) {
-            var regexp = new RegExp(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/);
-            if(!regexp.test(value)){
-                this.error = 
-                "Password should contain at least one digit, one lower case, one upper case and 8 from the mentionned characters.";
-                return false;
-            }
-            return true;
+          const regexp = new RegExp(
+            /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/,
+          );
+          if (!regexp.test(value)) {
+            this.error =
+              'Password should contain at least one digit, one lower case, one upper case and 8 from the mentionned characters.';
+            return false;
+          }
+          return true;
         },
         defaultMessage(): string {
           return this.error || 'Something went wrong';
-        }
+        },
       },
     });
   };
