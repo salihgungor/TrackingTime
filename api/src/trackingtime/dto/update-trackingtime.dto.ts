@@ -7,6 +7,8 @@ import {
   IsString,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IClient } from 'src/interfaces/client.interface';
+import { Client } from 'src/client/entities/client.entity';
 
 export class UpdateTrackingtimeDto {
   @ApiProperty({ required: false })
@@ -53,4 +55,10 @@ export class UpdateTrackingtimeDto {
   @IsNumber()
   @IsOptional()
   clientId?: number;
+
+  @ApiProperty({ required: false })
+  @IsNotEmpty()
+  @IsNumber()
+  @IsOptional()
+  client?: Client;
 }

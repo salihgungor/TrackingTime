@@ -1,0 +1,31 @@
+<div fxLayout="row" fxFlexFill fxLayout.xs="column" fxLayoutAlign="center center">
+  <mat-card fxFlex.gt-sm="30%">
+    <mat-card-title>Connexion</mat-card-title>
+    <mat-card-content fxLayout="column">
+      <form [formGroup]="form" (ngSubmit)="login()">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Email" formControlName="email">
+            <mat-error
+              *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+              {{displayError(form.controls['email'])}}
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+            <mat-error
+              *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)">
+              Password is required
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <mat-error class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </mat-error>
+        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid || disable">Se connecter</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

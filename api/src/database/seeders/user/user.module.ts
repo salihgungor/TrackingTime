@@ -8,4 +8,4 @@ import { UserSeederService } from './user.service';
   providers: [UserSeederService],
   exports: [UserSeederService],
 })
-export class LanguageSeederModule {}
+export class UserSeederModule {}

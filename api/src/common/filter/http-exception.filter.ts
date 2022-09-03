@@ -23,7 +23,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       timestamp: DateTime.now().toFormat('yyyy-MM-DD hh:mm:ss'),
       path: request.url,
       method: request.method,
-      message: exResp['message'] ? exResp['message'] : exception.message,
+      message: exResp,
     });
   }
 }

@@ -17,8 +17,6 @@ export class UserSeederService {
       return await this.userRepository
         .findOneBy({ email: user.email })
         .then((result) => {
-          // We check if a language already exists.
-          // If it does don't create a new one.
           if (result) {
             return Promise.resolve(null);
           }

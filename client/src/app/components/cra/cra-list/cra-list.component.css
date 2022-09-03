@@ -1,0 +1,16 @@
+.mat-row {
+  height: auto;
+  text-align: center;
+}
+
+.mat-cell {
+  padding: 18px 18px 18px 0;
+}
+
+.mat-header-cell{
+    text-align: center;
+}
+
+.cdk-column-nbDays,.cdk-column-nbHalfDays,.cdk-column-nbHours{
+    width: 5%;
+}

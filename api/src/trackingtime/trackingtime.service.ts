@@ -51,7 +51,6 @@ export class TrackingtimeService {
         400,
       );
     }
-
     const client = await this.clientService.findOne(
       createTrackingtimeDto.clientId,
     );
@@ -129,12 +128,12 @@ export class TrackingtimeService {
     return this.trackingtimeRepository.update({ id }, updateState);
   }
 
-  //get the total number of date between two date (including start_date)
+  //get the total number of days between two date (including start_date)
   getPeriodDays(start_date: Date, end_date: Date): number {
-    return DateTime.fromISO(end_date).diff(
-      DateTime.fromISO(start_date),
-      'years',
-    );
+    const start = DateTime.fromISO(start_date.toISOString());
+    const end = DateTime.fromISO(end_date.toISOString());
+    const duration = end.diff(start, 'days').toObject();
+    return duration.days;
   }
 
   //get the total days by giving days and hours

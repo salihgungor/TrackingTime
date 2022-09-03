@@ -40,7 +40,7 @@ export class TrackingtimeController {
         createTrackingtimeDto,
       );
     } catch (error) {
-      throw new HttpException(error.message, error.code);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -50,11 +50,11 @@ export class TrackingtimeController {
     try {
       return await this.trackingtimeService.findAll();
     } catch (error) {
-      throw new HttpException(error.message, error.code);
+      throw new HttpException(error.response, error.status);
     }
   }
 
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.USER)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
@@ -63,7 +63,7 @@ export class TrackingtimeController {
         throw new HttpException('Trackingtime not found', HttpStatus.NOT_FOUND);
       return trackingtime;
     } catch (error) {
-      throw new HttpException(error.message, error.code);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -78,7 +78,7 @@ export class TrackingtimeController {
     try {
       return this.trackingtimeService.updateState(+id, updateState);
     } catch (error) {
-      throw new HttpException(error.message, error.code);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -88,7 +88,7 @@ export class TrackingtimeController {
     try {
       return await this.trackingtimeService.remove(+id);
     } catch (error) {
-      throw new HttpException(error.message, error.code);
+      throw new HttpException(error.response, error.status);
     }
   }
 }

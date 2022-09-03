@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+  <button routerLink="" mat-button>
+    CRA Application
+  </button>
+  <span class="fill-remaining-space"></span>
+  <button mat-button *ngIf="isUser$ | async" routerLink="cra-add">Ajouter</button>
+  <button mat-button *ngIf="isAdmin$ | async" routerLink="cra-admin">CRA</button>
+  <button mat-button *ngIf="isUser$ | async" routerLink="cra">CRA</button>
+  <button mat-button *ngIf="isAdmin$ | async" routerLink="users">Utilisateurs</button>
+  <button mat-button routerLink="profile">User profile</button>
+  <button (click)="logout()" mat-button *ngIf="isLoggedIn$ | async as isLoggedIn">Logout</button>
+</mat-toolbar>

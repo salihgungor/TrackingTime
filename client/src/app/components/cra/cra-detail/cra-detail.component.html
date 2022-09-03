@@ -1,0 +1,91 @@
+<div fxLayout="row" fxFlexFill fxLayout.xs="column" fxLayoutAlign="center center">
+    <mat-card fxFlex.gt-sm="70%">
+      <mat-card-title style="text-align:center;">Ajouter CRA</mat-card-title>
+      <mat-card-content fxLayout="column">
+        <form [formGroup]="craForm" (ngSubmit)="updateCra()" class="form">
+          <div class="group">
+            <mat-form-field appearance="fill">
+              <mat-label>Date de début</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date_start" [disabled]="true">
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+              <mat-error
+                *ngIf="craForm.controls['date_start'].invalid && (craForm.controls['date_start'].dirty || craForm.controls['date_start'].touched)">
+                La date de début est requis
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Date de fin</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="date_end" [disabled]="true">
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+              <mat-error
+                *ngIf="craForm.controls['date_end'].invalid && (craForm.controls['date_end'].dirty || craForm.controls['date_end'].touched)">
+                La date de fin est requise.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Nombre de jours</mat-label>
+              <input matInput type="number" formControlName="nb_days">
+              <mat-error
+                *ngIf="craForm.controls['nb_days'].invalid && (craForm.controls['nb_days'].dirty || craForm.controls['nb_days'].touched)">
+                Le nombre de jour est requis.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Nombre de demi-journées</mat-label>
+              <input matInput type="number" formControlName="nb_half_days">
+              <mat-error
+                *ngIf="craForm.controls['nb_half_days'].invalid && (craForm.controls['nb_half_days'].dirty || craForm.controls['nb_half_days'].touched)">
+                Le nombre de demi-journée est requis.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Nombre d'heure</mat-label>
+              <input matInput type="number" formControlName="nb_hours">
+              <mat-error
+                *ngIf="craForm.controls['nb_hours'].invalid && (craForm.controls['nb_hours'].dirty || craForm.controls['nb_hours'].touched)">
+                Le nombre d'heures est requis.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Client</mat-label>
+              <mat-select formControlName="client">
+                <mat-option *ngFor="let client of clients" [value]="client.id">
+                  {{client.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="craForm.controls['client'].invalid">
+                Le client est requis.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="group">
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Commentaires</mat-label>
+              <textarea matInput formControlName="company_comment" style="resize:none;" rows="10" cols="50"></textarea>
+              <mat-error *ngIf="craForm.controls['company_comment'].invalid">
+                Max length is 50.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Commentaires (client)</mat-label>
+              <textarea matInput formControlName="client_comment" style="resize:none;" rows="10" cols="50"></textarea>
+              <mat-error *ngIf="craForm.controls['client_comment'].invalid">
+                Max length is 50.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="button-group">
+            <mat-error class="error-message" *ngIf="errorMessage">
+              {{ errorMessage }}
+            </mat-error>
+            <button type="submit" mat-raised-button color="primary" [disabled]="craForm.invalid">Modifier</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

@@ -36,7 +36,7 @@ export class ClientController {
     }
   }
 
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.USER)
   @Get()
   async findAll() {
     try {

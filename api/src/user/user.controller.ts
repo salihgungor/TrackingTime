@@ -46,7 +46,7 @@ export class UserController {
 
   @Get(':id')
   @UseInterceptors(ClassSerializerInterceptor)
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.USER)
   async findUsersById(@Param('id', ParseIntPipe) id: number) {
     try {
       const user = await this.userService.findOne(id);
@@ -76,7 +76,7 @@ export class UserController {
   async getUsersTrackingtimes(@Param('id', ParseIntPipe) id: number) {
     let trackingtimes = [];
     try {
-      await this.userService.findOne(id).then((user) => {
+      await this.userService.getTrackintimes(id).then((user) => {
         if (!user)
           throw new HttpException('User not found.', HttpStatus.UNAUTHORIZED);
         trackingtimes = user.trackingtimes;

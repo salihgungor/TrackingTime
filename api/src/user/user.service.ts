@@ -43,6 +43,15 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
+  getTrackintimes(id: number): Promise<User> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.trackingtimes', 'trackingtimes')
+      .leftJoinAndSelect('trackingtimes.client', 'client')
+      .where('user.id = :id', { id: id })
+      .getOne();
+  }
+
   findOneByEmail(email: string): Promise<User> {
     return this.userRepository.findOneBy({ email });
   }
